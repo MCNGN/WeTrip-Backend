@@ -13,11 +13,6 @@ app.use(express.json());
 // Define port
 const port = process.env.PORT || 4000;
 
-// Database connection
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
-
 // Test route
 app.use("/", routes);
 

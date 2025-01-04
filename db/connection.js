@@ -1,12 +1,19 @@
-const { Client } = require('pg');
-require('dotenv').config();
+const mysql = require("mysql");
+require("dotenv").config();
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
 
-client.connect()
-  .then(() => console.log('Connected to PostgreSQL database'))
-  .catch(err => console.error('Connection error', err.stack));
+connection.connect((err) => {
+  if (err) {
+    console.error("Connection error", err.stack);
+    return;
+  }
+  console.log("Connected to MySQL database");
+});
 
-module.exports = client;
+module.exports = connection;
